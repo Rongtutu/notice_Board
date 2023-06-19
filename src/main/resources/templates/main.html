@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+
+        .board-title {
+            font-size: 24px;
+        }
+
+        .write-link {
+            font-size: 18px;
+            margin-left: 1850px;
+        }
+
+        table {
+            margin: 0 auto;
+            width: 800px;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .id {
+            width: 50px;
+        }
+
+        .title {
+            width: 320px;
+        }
+
+        .name {
+            width: 100px;
+        }
+
+        .count {
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="board-title">게시판</div>
+    <a href="/write" class="write-link">글쓰기</a>
+    <a sec:authorize="isAuthenticated()"><a th:href="@{/logout}">로그아웃</a></a>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th class="id">글번호</th>
+        <th class="title">제목</th>
+        <th class="name">글쓴이</th>
+        <th class="count">글시간</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="board: ${list}">
+        <td th:text="${board.id}" class="id"></td>
+        <td class="title"><a th:text="${board.title}" th:href="@{/view(id=${board.id})}"></a></td>
+        <td th:text="${board.writer}" class="name"></td>
+        <td th:text="${board.localDateTime}" class="count"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

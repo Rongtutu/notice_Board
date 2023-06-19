@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .input-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .title,
+        .contents {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .title {
+            font-size: 18px;
+        }
+
+        .contents {
+            height: 200px;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<form method="post" action="/modifyOk" class="input-form">
+    <input hidden="hidden" th:value="${board.get().id}" name="id">
+    <div class="write-top">
+        <h1>글쓰기</h1>
+        <input type="submit" value="변경">
+    </div>
+    <input type="text" name="title" placeholder="제목" class="title" th:value="${board.get().title}">
+    <br/>
+    <textarea type="text" name="contents" placeholder="내용" class="contents" th:text="${board.get().contents}"></textarea>
+    <br/>
+</form>
+</body>
+</html>
